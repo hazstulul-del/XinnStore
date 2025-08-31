@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XinStore - Top Up Robux</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid #fdbb2d;
+        }
+        
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            color: #fdbb2d;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            opacity: 0.8;
+        }
+        
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .package {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .package:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #fdbb2d;
+        }
+        
+        .package.selected {
+            background: rgba(253, 187, 45, 0.2);
+            border-color: #fdbb2d;
+        }
+        
+        .robux-amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fdbb2d;
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .bonus {
+            font-size: 14px;
+            color: #00ff00;
+            margin-top: 5px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .payment-info {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .payment-method img {
+            width: 60px;
+            margin-right: 15px;
+        }
+        
+        .payment-details {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #fdbb2d;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #ffcc44;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: #00cc66;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 600px) {
+            .packages {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">XinStore</div>
+            <div class="tagline">Top Up Robux Aman, Cepat, dan Terpercaya</div>
+        </header>
+        
+        <div class="packages">
+            <div class="package" data-robux="400" data-price="10000">
+                <div class="robux-amount">400 Robux</div>
+                <div class="price">Rp 10.000</div>
+                <div class="bonus">Bonus: 10 Robux</div>
+            </div>
+            <div class="package" data-robux="1000" data-price="25000">
+                <div class="robux-amount">1000 Robux</div>
+                <div class="price">Rp 25.000</div>
+                <div class="bonus">Bonus: 50 Robux</div>
+            </div>
+            <div class="package" data-robux="2000" data-price="50000">
+                <div class="robux-amount">2000 Robux</div>
+                <div class="price">Rp 50.000</div>
+                <div class="bonus">Bonus: 150 Robux</div>
+            </div>
+            <div class="package" data-robux="4000" data-price="100000">
+                <div class="robux-amount">4000 Robux</div>
+                <div class="price">Rp 100.000</div>
+                <div class="bonus">Bonus: 400 Robux</div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="username">Username Roblox</label>
+            <input type="text" id="username" placeholder="Masukkan username Roblox Anda">
+        </div>
+        
+        <div class="payment-info">
+            <div class="payment-method">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTY1LjkgMzg0LjVoMTgwLjJjMjUuMiAwIDQ1LjgtMjAuNiA0NS44LTQ1LjhWMTczLjNjMC0yNS4yLTIwLjYtNDUuOC00NS44LTQ1LjhIMTY1LjljLTI1LjIgMC00NS44IDIwLjYtNDUuOCA0NS44djE2NS40YzAgMjUuMiAyMC42IDQ1LjggNDUuOCA0NS44em0xODAuMi0yMjkuOWMxMC43IDAgMTkuNCA4LjcgMTkuNCAxOS40djE2NS40YzAgMTAuNy04LjcgMTkuNC0xOS40IDE5LjRIMTY1LjljLTEwLjcgMC0xOS40LTguNy0xOS40LTE5LjRWMTczLjNjMC0xMC43IDguNy0xOS40IDE5LjQtMTkuNGgxODAuMnpNNDQ2LjYgMjU2YzAgMTA1LjEtODUuNSAxOTAuNi0xOTAuNiAxOTAuNkMxNTAuOSA0NDYuNiA2NS40IDM2MS4xIDY1LjQgMjU2UzE1MC45IDY1LjQgMjU2IDY1LjRjMTA1LjEgMCAxOTAuNiA4NS41IDE5MC42IDE5MC42em0tMjIuNSAwYzAtOTIuOC03NS4zLTE2OC4xLTE2OC4xLTE2OC4xUzg3LjkgMTYzLjIgODcuOSAyNTZzNzUuMyAxNjguMSAxNjguMSAxNjguMSAxNjguMS03NS4zIDE2OC4xLTE2OC4xeiIvPjwvc3ZnPg==" alt="DANA">
+                <div>Transfer ke DANA</div>
+            </div>
+            <div class="payment-details">
+                <strong>083175050030</strong>
+            </div>
+            <div>a.n. XinStore</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="payment-proof">Upload Bukti Pembayaran</label>
+            <input type="text" id="payment-proof" placeholder="Link bukti transfer (Google Drive, dll)">
+        </div>
+        
+        <button class="btn" id="process-btn">Proses Sekarang</button>
+        
+        <footer>
+            &copy; 2023 XinStore - Layanan Top Up Robux. Bukan afiliasi dengan Roblox Corporation.
+        </footer>
+    </div>
+    
+    <div class="notification" id="notification">
+        Pembayaran berhasil diproses! Robux akan dikirim dalam 5-10 menit.
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const packages = document.querySelectorAll('.package');
+            let selectedPackage = null;
+            
+            packages.forEach(pkg => {
+                pkg.addEventListener('click', function() {
+                    packages.forEach(p => p.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedPackage = this;
+                });
+            });
+            
+            document.getElementById('process-btn').addEventListener('click', function() {
+                const username = document.getElementById('username').value;
+                const paymentProof = document.getElementById('payment-proof').value;
+                
+                if (!selectedPackage) {
+                    alert('Pilih paket Robux terlebih dahulu!');
+                    return;
+                }
+                
+                if (!username) {
+                    alert('Masukkan username Roblox Anda!');
+                    return;
+                }
+                
+                if (!paymentProof) {
+                    alert('Masukkan bukti pembayaran!');
+                    return;
+                }
+                
+                const robuxAmount = selectedPackage.getAttribute('data-robux');
+                const price = selectedPackage.getAttribute('data-price');
+                
+                // Simulasi pengiriman data
+                const notification = document.getElementById('notification');
+                notification.textContent = `Pembayaran untuk ${robuxAmount} Robux berhasil diproses! Robux akan dikirim ke ${username} dalam 5-10 menit.`;
+                notification.style.display = 'block';
+                
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 5000);
+                
+                // Reset form
+                document.getElementById('username').value = '';
+                document.getElementById('payment-proof').value = '';
+                selectedPackage.classList.remove('selected');
+                selectedPackage = null;
+            });
+        });
+    </script>
+</body>
+</html>
